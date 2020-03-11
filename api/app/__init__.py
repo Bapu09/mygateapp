@@ -2,18 +2,24 @@ from flask import Flask, g, render_template, url_for, redirect, flash, make_resp
 import jwt
 from werkzeug.security import generate_password_hash, check_password_hash
 import datetime
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 
 
-@app.route('/login', methods = ['POST'])
+@app.route('/login', methods = ['POST', 'GET'])
 def login():
-    phone = request.form['phone']
-    password = request.form['password']
-    
-    token = encode_JWT_token(str(phone))
-    return jsonify({'token' : token, 'status' : True, 'code' : 200})
+    if(request.method == 'POST') :
+        
+        phone = request.form['phone']
+        password = request.form['password']
+        
+        token = encode_JWT_token(str(phone))
+        return jsonify({'token' : token, 'status' : True, 'code' : 200})
+    else:
+        return jsonify({'status' : Fasle, 'code' : 500, 'message': "Invalid Request"})
     
     
     
