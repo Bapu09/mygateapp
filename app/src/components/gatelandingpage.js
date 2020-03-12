@@ -1,58 +1,66 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, ActivityIndicator, Image, Dimensions } from 'react-native';
+const DeviceWidth = Dimensions.get('window').width
 
 class GateLandingPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             loading : false,
-            iconSource : {
-                
-            }
         };
     }
     
     componentDidMount() {
-        var that = this;
-        let items = Array.apply(null, Array(60)).map((v,i) => {
-            return { id: i, src: 'http://placehold.it/200x200?text=' + (i + 1) };
-        });
         
-        that.setState({
-            iconSource : items
-        });
     }
     
     render() {
         return (
-            <View style={styles.iconWrapper}>
-                <FlatList
-                    style={styles.gridview}
-                    data={this.state.iconSource}
-                    renderItem={ ({item}) => (
-                        <View style={{ flex: 1, flexDirection: 'column', margin: 1 }}>
-                            <Image style={styles.imageThumbnail} source={{ uri: item.src }} />
-                        </View>
-                    )}
-                    numColumns={3}
-                    keyExtractor={(item, index) => index.toString()}
-                />
-                
-            </View>
+            <View style={styles.menuWrapper}>
+                <View style={{
+                  flexDirection: 'row',
+                  backgroundColor: "grey"}}>
+                  <View>
+                    <View style={styles.gridSingleMenuView}/>
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                  </View>
+                  <View>
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                  </View>
+                  <View>
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                    <View style={styles.gridSingleMenuView} />
+                  </View>    
+                </View>
+              </View>
         )
     }
 }
 
 const styles = StyleSheet.create({
-    iconWrapper : {
+    menuWrapper : {
         justifyContent: 'center',
         flex: 1,
-        paddingTop: 30,
-    },
-    imageThumbnail : {
-        justifyContent: 'center',
+        padding: 25,
         alignItems: 'center',
-        height: 100,
+    },
+    imageList : {
+        flex: 1
+    },
+    gridSingleMenuView : {
+        width: DeviceWidth*0.3, 
+        height: DeviceWidth*0.3,
+        marginBottom:1,
+        backgroundColor: 'powderblue',
+        borderColor: '#FFFFFF',
+        borderWidth: 1
     }
 });
 
